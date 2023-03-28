@@ -59,7 +59,7 @@ impl SyllableBuilder {
         self
     }
 
-    pub fn with_nucleus<S: AsRef<str>>(mut self, nucleus: &[S]) -> Self {
+    pub fn with_nuclei<S: AsRef<str>>(mut self, nucleus: &[S]) -> Self {
         self.nucleus = Grapheme::map_slice(nucleus);
 
         self
@@ -109,12 +109,12 @@ pub struct Syllable {
 impl Default for Syllable {
     fn default() -> Self {
         Self {
-            onsets: vec![ "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" ].into_iter().map(|s| s.into()).collect(),
-            onset_clusters: vec![ "ch", "sh", "bl", "cl", "fl", "pl", "gl", "br", "cr", "dr", "pr", "tr", "th", "sc", "sp", "st", "sl", "spr" ].into_iter().map(|s| s.into()).collect(),
-            nucleus: vec![ "a", "e", "i", "o", "u" ].into_iter().map(|s| s.into()).collect(),
-            nucleus_clusters: vec![ "ae", "ea", "ai", "ia", "au", "ay", "ie", "oi", "ou", "ey" ].into_iter().map(|s| s.into()).collect(),
-            codas: vec![ "b", "c", "d", "f", "g", "h", "k", "l", "m", "n", "p", "r", "s", "t", "v", "x", "y"].into_iter().map(|s| s.into()).collect(),
-            coda_clusters: vec![ "ck", "st", "sc", "ng", "nk", "rsh", "lsh", "rk", "rst", "nct", "xt" ].into_iter().map(|s| s.into()).collect(),
+            onsets: Grapheme::map_slice(&[ "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" ]),
+            onset_clusters: Grapheme::map_slice(&[ "ch", "sh", "bl", "cl", "fl", "pl", "gl", "br", "cr", "dr", "pr", "tr", "th", "sc", "sp", "st", "sl", "spr" ]),
+            nucleus: Grapheme::map_slice(&[ "a", "e", "i", "o", "u" ]),
+            nucleus_clusters: Grapheme::map_slice(&[ "ae", "ea", "ai", "ia", "au", "ay", "ie", "oi", "ou", "ey" ]),
+            codas: Grapheme::map_slice(&[ "b", "c", "d", "f", "g", "h", "k", "l", "m", "n", "p", "r", "s", "t", "v", "x", "y"]),
+            coda_clusters: Grapheme::map_slice(&[ "ck", "st", "sc", "ng", "nk", "rsh", "lsh", "rk", "rst", "nct", "xt" ]),
 
             probability_onset_exists: 0.95,
             probability_onset_is_cluster: 0.25,
